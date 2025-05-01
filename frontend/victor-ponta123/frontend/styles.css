@@ -1,0 +1,137 @@
+/* Setăm dimensiunea textului de bază */
+html {
+  font-size: 18px; /* 1rem = 16px */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: #111;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 1.5rem 1rem 2rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0.5em 0;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: #c00;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.3rem;
+  color: #003366;
+  text-align: center;
+}
+
+p,
+.info {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.button,
+.btn {
+  display: block;
+  width: 100%;
+  padding: 0.7em 0;
+  margin: 0.5em 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid #c00;
+  background: #c00;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button.yellow,
+.btn.yellow {
+  background: #ffe600;
+  color: #c00;
+  border-color: #c00;
+}
+
+.button.blue,
+.btn.blue {
+  background: #003366;
+  color: #fff;
+  border-color: #003366;
+}
+
+/* Stiluri pentru ecrane mici (mobile) */
+@media (max-width: 600px) {
+  html {
+    font-size: 15px; /* Reduce dimensiunea textului */
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .container {
+    padding: 1rem 0.3rem 1.5rem 0.3rem;
+    max-width: 98vw;
+  }
+
+  .button,
+  .btn {
+    font-size: 1rem;
+    padding: 0.6em 0;
+  }
+}
+
+/* Stiluri pentru ecrane medii (tablete) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Stiluri pentru ecrane mari (desktop) */
+@media (min-width: 1025px) {
+  html {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+}
