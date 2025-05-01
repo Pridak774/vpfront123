@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "username": "kbk",
+      "address": "kbk",
+      "registeredAt": 1746098118131,
+      "lastMine": 1746098123794,
+      "balance": 1400
+    },
+    {
+      "username": "weddww",
+      "address": "weddww",
+      "registeredAt": 1746098468049,
+      "lastMine": 1746098470689,
+      "balance": 1400
+    },
+    {
+      "username": "were",
+      "address": "04cfe6f2c04e9254de36fb20f81a97b33bd9859f053fc1d2c62456aa723d85a984d70fcebe7019551caf61ae1ef3d8a4e845ea49f646d846a0d8344fd5a7a555e6",
+      "privateKey": "2ed4697b335df15db2a05bf7bea2ddc32244e0e4c38a738e4a4ce45db931f4f5",
+      "registeredAt": 1746109672887
+    },
+    {
+      "username": "dedd",
+      "address": "04d2953b7fa86191170a0db98d452b2544301b89a5223844e00b49be926eae1184edecaf0e753af7d867c68343deb038cb932f638cf3d826c03cb1093d91f4e841",
+      "privateKey": "33b749dcdf9c4fc6537531c020e7d821f3bf9506929b3cffff93a4365621d070",
+      "registeredAt": 1746109974495
+    },
+    {
+      "username": "lnklbn",
+      "address": "04e58cddca56653e3e61ab2afc801d11fa9072f32102f60b686d6a944dad0ffea79d6f086a0998538a25a2a4444c3e8baec19372d5c3ee0565997f90cd9ee2a967",
+      "privateKey": "f4ac406cad5aae7ddf9f5e78b47d892584199afb80d790254c63096c22982447",
+      "registeredAt": 1746110286697
+    },
+    {
+      "username": "don",
+      "address": "04e9df5a01fc2f7d2b8c612f7118aa05f170351b9d79a77ae93712c11adea493084454116c8201d0419c022cd0aa9d4a2242416e18f0b38175752ae423f820a3e1",
+      "privateKey": "6db2a98c6dd053d0edeec41763bd616d6ebdd0ee3f8b9306fecc186240c08cce",
+      "registeredAt": 1746110433388
+    }
+  ],
+  "transactions": [
+    {
+      "from": null,
+      "to": "kbk",
+      "amount": 1000,
+      "type": "airdrop",
+      "timestamp": 1746098118131
+    },
+    {
+      "from": null,
+      "to": "kbk",
+      "amount": 400,
+      "type": "mine",
+      "timestamp": 1746098123794
+    },
+    {
+      "from": null,
+      "to": "weddww",
+      "amount": 1000,
+      "type": "airdrop",
+      "timestamp": 1746098468049
+    },
+    {
+      "from": null,
+      "to": "weddww",
+      "amount": 400,
+      "type": "mine",
+      "timestamp": 1746098470689
+    }
+  ]
+}
