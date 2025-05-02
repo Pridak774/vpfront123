@@ -283,7 +283,7 @@ export default function Home() {
               alt="Victor Ponta"
               width={120}
               height={120}
-              className="rounded-full border-4 border-white mb-6 animate-bounce"
+              className="rounded-full border-4 border-white mb-6"
             />
             <h1 className="text-3xl sm:text-5xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg text-center animate-pulse-text">
               Victor Viorel Ponta
@@ -327,10 +327,16 @@ export default function Home() {
           <h1 className="text-3xl sm:text-6xl font-black text-[#c00] mb-2 uppercase tracking-widest drop-shadow-lg text-center">
             Victor Viorel Ponta
           </h1>
-          <h2 className="text-lg sm:text-2xl font-extrabold text-[#003366] mb-6 uppercase tracking-wider text-center">
+          <h2 className="text-lg sm:text-2xl font-extrabold text-[#003366] mb-2 uppercase tracking-wider text-center">
             Candidat Independent la Președinția României
           </h2>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 w-full max-w-xs sm:max-w-md mx-auto">
+          <div className="mb-2 px-4 sm:px-6 py-2 sm:py-3 bg-[#fff200] text-[#18181b] rounded-md font-black shadow-lg border-4 border-[#c00] text-base sm:text-xl text-center transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+            POZIȚIA 6 PE BULETINUL DE VOT
+          </div>
+          <p className="text-lg sm:text-3xl font-extrabold text-[#003366] bg-[#fff200] px-4 sm:px-8 py-2 sm:py-3 rounded-md shadow-lg mb-4 uppercase tracking-wider border-4 border-[#c00] transform hover:scale-105 transition-transform duration-300 text-center">
+            ROMÂNIA PE PRIMUL LOC
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 w-full max-w-xs sm:max-w-md mx-auto">
             <a
               href="#token"
               className="w-full sm:w-1/2 px-8 py-4 bg-[#c00] text-white rounded-md font-black shadow-lg hover:bg-[#a00] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
@@ -343,6 +349,18 @@ export default function Home() {
             >
               AI PONTA
             </a>
+          </div>
+          {/* Countdown Section Restored */}
+          <div className="mt-2 mb-2 w-full max-w-md mx-auto flex flex-col items-center">
+            <div className="text-[#003366] font-bold text-lg sm:text-xl mb-1 uppercase tracking-wide">
+              NUMĂRĂTOAREA INVERSĂ
+            </div>
+            <div className="text-[#c00] font-black text-base sm:text-lg mb-1">
+              {getRoundText(currentRound)}
+            </div>
+            <div className="text-[#003366] font-bold text-base sm:text-lg">
+              {formatTimeLeft(timeLeft)}
+            </div>
           </div>
         </div>
       </header>
