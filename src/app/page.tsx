@@ -1044,14 +1044,31 @@ export default function Home() {
             </div>
           </section>
 
-          {/* PONTA AI Section */}
-          <section className="my-12 max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-[#003366] p-8 flex flex-col items-center">
-            <h3 className="text-3xl font-black text-[#003366] mb-4 uppercase border-b-4 border-[#c00] pb-2 text-center">
-              🤖 PONTA AI
-            </h3>
-            <p className="text-[#18181b] text-base mb-4 text-center">
-              Întreabă-l pe <b>PONTA AI</b> orice despre blockchain, tehnologie,
-              campanie sau România! Răspunsul este generat de AI Gemini.
+          {/* PONTA AI Section - Tech & Professional Redesign */}
+          <section className="my-12 max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl border-4 border-[#003366] p-10 flex flex-col items-center relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none opacity-10 select-none">
+              <svg width="100%" height="100%" viewBox="0 0 600 300">
+                <defs>
+                  <linearGradient id="aiGradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#003366" />
+                    <stop offset="100%" stopColor="#c00" />
+                  </linearGradient>
+                </defs>
+                <circle cx="500" cy="60" r="80" fill="url(#aiGradient)" />
+                <rect x="60" y="200" width="200" height="40" rx="20" fill="#003366" />
+                <rect x="400" y="120" width="120" height="20" rx="10" fill="#c00" />
+                <rect x="200" y="40" width="80" height="20" rx="10" fill="#003366" />
+              </svg>
+            </div>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="inline-block text-4xl">
+                <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#003366"/><path d="M24 36c6.627 0 12-5.373 12-12S30.627 12 24 12 12 17.373 12 24s5.373 12 12 12Z" fill="#fff"/><circle cx="19" cy="23" r="2" fill="#003366"/><circle cx="29" cy="23" r="2" fill="#003366"/><rect x="20" y="28" width="8" height="2" rx="1" fill="#003366"/></svg>
+              </span>
+              <h3 className="text-4xl font-black text-[#003366] tracking-tight uppercase">PONTA AI</h3>
+            </div>
+            <div className="w-16 h-1 bg-[#c00] rounded-full mb-6"></div>
+            <p className="text-[#18181b] text-lg mb-6 text-center max-w-xl">
+              <b>PONTA AI</b> este asistentul tău digital pentru blockchain, tehnologie, campanie și România. Răspunsurile sunt generate de AI Ponta, cu context profesional și actual.
             </p>
             <form
               className="w-full flex flex-col sm:flex-row gap-4 mb-4"
@@ -1081,18 +1098,13 @@ export default function Home() {
                     }
                   );
                   const data = await res.json();
-                  if (
-                    data.candidates &&
-                    data.candidates[0]?.content?.parts[0]?.text
-                  ) {
+                  if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
                     setAiResponse(data.candidates[0].content.parts[0].text);
                   } else {
                     setAiError("Nu am putut obține un răspuns de la AI.");
                   }
                 } catch (err) {
-                  setAiError(
-                    "Eroare la conectarea cu AI-ul. Încearcă din nou."
-                  );
+                  setAiError("Eroare la conectarea cu AI-ul. Încearcă din nou.");
                 } finally {
                   setAiLoading(false);
                 }
@@ -1100,30 +1112,37 @@ export default function Home() {
             >
               <input
                 type="text"
-                className="flex-1 px-4 py-3 border-2 border-[#003366] rounded-md text-lg focus:outline-none focus:border-[#c00]"
+                className="flex-1 px-4 py-4 border-2 border-[#003366] rounded-lg text-lg focus:outline-none focus:border-[#c00] bg-white placeholder-gray-400 shadow-sm transition-all duration-200"
                 placeholder="Scrie întrebarea ta pentru PONTA AI..."
                 value={aiInput}
                 onChange={(e) => setAiInput(e.target.value)}
                 required
                 maxLength={200}
                 disabled={aiLoading}
+                style={{ minHeight: 56 }}
               />
               <button
                 type="submit"
-                className="px-8 py-3 bg-[#003366] text-white rounded-md font-black shadow-lg hover:bg-[#002244] text-lg transition uppercase tracking-wider"
+                className="px-8 py-4 bg-[#003366] text-white rounded-lg font-black shadow-lg hover:bg-[#c00] text-lg transition uppercase tracking-wider flex items-center justify-center gap-2"
                 disabled={aiLoading || !aiInput.trim()}
+                style={{ minHeight: 56 }}
               >
-                {aiLoading ? "Așteaptă..." : "Trimite către PONTA AI"}
+                {aiLoading ? (
+                  <span className="animate-spin-slow inline-block mr-2">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" strokeWidth="4" opacity="0.2"/><path d="M22 12a10 10 0 0 1-10 10" stroke="#fff" strokeWidth="4" strokeLinecap="round"/></svg>
+                  </span>
+                ) : null}
+                {aiLoading ? "Așteaptă..." : "TRIMITE CĂTRE PONTA AI"}
               </button>
             </form>
             {aiError && (
-              <div className="text-[#c00] font-bold mb-3 bg-[#ffeeee] p-2 rounded-md w-full text-center">
+              <div className="text-[#c00] font-bold mb-3 bg-[#f8d7da] p-3 rounded-md w-full text-center border-2 border-[#c00]">
                 {aiError}
               </div>
             )}
             {aiResponse && (
-              <div className="w-full bg-[#f8f8f8] border-2 border-[#003366] rounded-md p-4 mt-2 text-[#003366] text-base whitespace-pre-line shadow animate-pulse-slow">
-                <b>Răspuns PONTA AI:</b>
+              <div className="w-full bg-[#f4f8fb] border-2 border-[#003366] rounded-xl p-6 mt-2 text-[#003366] text-lg whitespace-pre-line shadow animate-pulse-slow font-mono">
+                <b className="text-[#c00]">Răspuns PONTA AI:</b>
                 <br />
                 {aiResponse}
               </div>
@@ -1499,89 +1518,4 @@ export default function Home() {
         }
 
         .animate-text-glow {
-          animation: textGlow 2s infinite alternate;
-        }
-        @keyframes textGlow {
-          0% {
-            filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.8));
-          }
-          100% {
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 1));
-          }
-        }
-
-        /* Orbiting particles */
-        @keyframes float-particle {
-          0% {
-            transform: translateY(0) translateX(0);
-          }
-          100% {
-            transform: translateY(-10px) translateX(5px);
-          }
-        }
-
-        /* Orbit animations for each satellite */
-        @keyframes orbit0 {
-          0% {
-            transform: translate(-50%, -50%) rotate(0deg) translateX(70px)
-              rotate(0deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(360deg) translateX(70px)
-              rotate(-360deg);
-          }
-        }
-        @keyframes orbit1 {
-          0% {
-            transform: translate(-50%, -50%) rotate(60deg) translateX(70px)
-              rotate(-60deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(420deg) translateX(70px)
-              rotate(-420deg);
-          }
-        }
-        @keyframes orbit2 {
-          0% {
-            transform: translate(-50%, -50%) rotate(120deg) translateX(70px)
-              rotate(-120deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(480deg) translateX(70px)
-              rotate(-480deg);
-          }
-        }
-        @keyframes orbit3 {
-          0% {
-            transform: translate(-50%, -50%) rotate(180deg) translateX(70px)
-              rotate(-180deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(540deg) translateX(70px)
-              rotate(-540deg);
-          }
-        }
-        @keyframes orbit4 {
-          0% {
-            transform: translate(-50%, -50%) rotate(240deg) translateX(70px)
-              rotate(-240deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(600deg) translateX(70px)
-              rotate(-600deg);
-          }
-        }
-        @keyframes orbit5 {
-          0% {
-            transform: translate(-50%, -50%) rotate(300deg) translateX(70px)
-              rotate(-300deg);
-          }
-          100% {
-            transform: translate(-50%, -50%) rotate(660deg) translateX(70px)
-              rotate(-660deg);
-          }
-        }
-      `}</style>
-    </div>
-  );
-}
+          animation: textGlow 2
