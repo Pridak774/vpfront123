@@ -41,6 +41,12 @@ export default function Home() {
   const [loginKey, setLoginKey] = useState("");
   const [loginError, setLoginError] = useState("");
 
+  // --- React state pentru PONTA AI ---
+  const [aiInput, setAiInput] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState("");
+
   // Registration handler: only send { username }
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -569,6 +575,207 @@ export default function Home() {
                 </circle>
               </svg>
             </div>
+
+            {/* Blockchain Visualization - Enhanced Animated Network */}
+            <div className="w-full flex flex-col items-center mb-8">
+              <h4 className="text-xl font-bold text-[#003366] mb-4">
+                PONTA Blockchain Network - Live Visualization
+              </h4>
+              <div className="relative w-full max-w-3xl h-80 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl overflow-hidden p-4 border border-slate-700 shadow-xl">
+                {/* Central Node */}
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#fff200] to-[#c00] flex items-center justify-center animate-node-throb">
+                    <span className="text-white font-bold text-sm">
+                      MAINNET
+                    </span>
+                  </div>
+                  <div className="absolute left-1/2 top-1/2 w-24 h-24 rounded-full border-2 border-[#c00] transform -translate-x-1/2 -translate-y-1/2 animate-ping-slow opacity-50"></div>
+                </div>
+
+                {/* Orbital Nodes */}
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <div
+                    key={i}
+                    className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      animation: `orbit${i % 8} ${10 + i * 2}s linear infinite`,
+                    }}
+                  >
+                    <div
+                      className={`w-8 h-8 rounded-full ${
+                        i % 2 === 0 ? "bg-[#003366]" : "bg-[#c00]"
+                      } flex items-center justify-center shadow-glow-sm`}
+                    >
+                      <span className="text-white text-xs">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Data Packets */}
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={`packet-${i}`}
+                    className="absolute"
+                    style={{
+                      left: `${20 + i * 30}%`,
+                      top: `${30 + i * 20}%`,
+                      animation: `dataPacket ${3 + i}s ease-out infinite ${
+                        i * 0.5
+                      }s`,
+                    }}
+                  >
+                    <div className="px-2 py-1 bg-white bg-opacity-20 rounded text-xs text-white font-mono shadow-glow-sm whitespace-nowrap">
+                      {["Tx: 0x8a...3f", "Block: 65432", "Hash: 0xF8...9c"][i]}
+                    </div>
+                  </div>
+                ))}
+
+                {/* Connection Lines */}
+                <svg
+                  className="absolute inset-0 w-full h-full"
+                  style={{ zIndex: 0 }}
+                >
+                  {/* Grid Lines */}
+                  <pattern
+                    id="grid"
+                    x="0"
+                    y="0"
+                    width="40"
+                    height="40"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 40 0 L 0 0 0 40"
+                      fill="none"
+                      stroke="#334155"
+                      strokeWidth="0.5"
+                      strokeDasharray="1 3"
+                    />
+                  </pattern>
+                  <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#grid)"
+                  />
+
+                  {/* Dynamic Connection Lines */}
+                  {[
+                    { x1: "30%", y1: "40%", x2: "50%", y2: "50%" },
+                    { x1: "70%", y1: "40%", x2: "50%", y2: "50%" },
+                    { x1: "20%", y1: "60%", x2: "50%", y2: "50%" },
+                    { x1: "80%", y1: "60%", x2: "50%", y2: "50%" },
+                    { x1: "40%", y1: "20%", x2: "50%", y2: "50%" },
+                    { x1: "60%", y1: "20%", x2: "50%", y2: "50%" },
+                    { x1: "40%", y1: "80%", x2: "50%", y2: "50%" },
+                    { x1: "60%", y1: "80%", x2: "50%", y2: "50%" },
+                  ].map((line, i) => (
+                    <line
+                      key={`line-${i}`}
+                      x1={line.x1}
+                      y1={line.y1}
+                      x2={line.x2}
+                      y2={line.y2}
+                      stroke={i % 2 === 0 ? "#c00" : "#003366"}
+                      strokeWidth="1"
+                      strokeDasharray="4 4"
+                      className="animate-pulse-slow"
+                    />
+                  ))}
+
+                  {/* Data Transfer Lines */}
+                  {[
+                    { x1: "30%", y1: "40%", x2: "50%", y2: "50%", delay: "0s" },
+                    {
+                      x1: "70%",
+                      y1: "40%",
+                      x2: "50%",
+                      y2: "50%",
+                      delay: "0.7s",
+                    },
+                    {
+                      x1: "20%",
+                      y1: "60%",
+                      x2: "50%",
+                      y2: "50%",
+                      delay: "1.4s",
+                    },
+                    {
+                      x1: "80%",
+                      y1: "60%",
+                      x2: "50%",
+                      y2: "50%",
+                      delay: "2.1s",
+                    },
+                  ].map((line, i) => (
+                    <line
+                      key={`data-line-${i}`}
+                      x1={line.x1}
+                      y1={line.y1}
+                      x2={line.x2}
+                      y2={line.y2}
+                      stroke={i % 2 === 0 ? "#fff200" : "#ffffff"}
+                      strokeWidth="2"
+                      strokeDasharray="3 17"
+                      style={{
+                        animation: `txnLine 3s ease infinite ${line.delay}`,
+                        opacity: 0,
+                      }}
+                    />
+                  ))}
+                </svg>
+
+                {/* Stats Overlay */}
+                <div className="absolute bottom-3 left-3 right-3 flex justify-between text-xs text-white font-mono bg-black bg-opacity-40 backdrop-blur-sm p-2 rounded">
+                  <div>
+                    Blocks: <span className="text-[#fff200]">65,432</span>
+                  </div>
+                  <div>
+                    Txns: <span className="text-[#fff200]">1,532,765</span>
+                  </div>
+                  <div>
+                    Users:{" "}
+                    <span className="text-[#fff200]">
+                      {users.length || "0"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Tech Binary Overlay */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+                  <div className="binary-rain">
+                    {"10010110010101010001110101010110110"
+                      .split("")
+                      .map((char, i) => (
+                        <span
+                          key={i}
+                          style={{
+                            position: "absolute",
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            color: char === "1" ? "#c00" : "#fff200",
+                            fontSize: `${Math.random() * 10 + 8}px`,
+                            opacity: Math.random() * 0.8 + 0.2,
+                            animation: `float ${
+                              Math.random() * 10 + 5
+                            }s infinite linear`,
+                          }}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                  </div>
+                </div>
+              </div>
+              <div className="text-center text-sm text-gray-600 mt-2">
+                PONTA Blockchain • Vizualizare grafică în timp real • Blockchain
+                tehnologie sigură
+              </div>
+            </div>
+
             {/* Lista adrese blockchain MUTATĂ ÎN ACEASTĂ SECȚIUNE */}
             <section className="mb-8 bg-yellow-50 rounded shadow p-4 border-2 border-[#c00]">
               <h3 className="text-xl font-bold text-[#c00] mb-2">
@@ -619,6 +826,20 @@ export default function Home() {
                 <br />
                 <b>PONTA Token</b> este moneda digitală oficială a sistemului
                 PONTA Blockchain.
+              </span>
+            </div>
+            {/* UTILITATEA TOKENULUI */}
+            <div className="mb-6 px-6 py-4 bg-[#fff200] text-[#003366] rounded-md font-black shadow-lg border-4 border-[#c00] text-lg text-center">
+              <span className="block text-xl mb-2">
+                UTILITATEA TOKENULUI PONTA
+              </span>
+              <span className="block text-base font-normal text-[#18181b]">
+                Tokenul <b>PONTA</b> va fi folosit ca vot digital pentru
+                viitoarele propuneri făcute de Președinte și pentru inițiativele
+                propuse de cetățeni. Oricine deține tokenuri va putea vota sau
+                propune noi proiecte pentru România.{" "}
+                <b>Tokenul NU are valoare financiară</b>, ci doar rol de
+                participare civică și democratică în platforma PONTA Blockchain.
               </span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
@@ -823,6 +1044,92 @@ export default function Home() {
             </div>
           </section>
 
+          {/* PONTA AI Section */}
+          <section className="my-12 max-w-2xl mx-auto bg-white rounded-xl shadow-2xl border-4 border-[#003366] p-8 flex flex-col items-center">
+            <h3 className="text-3xl font-black text-[#003366] mb-4 uppercase border-b-4 border-[#c00] pb-2 text-center">
+              🤖 PONTA AI
+            </h3>
+            <p className="text-[#18181b] text-base mb-4 text-center">
+              Întreabă-l pe <b>PONTA AI</b> orice despre blockchain, tehnologie,
+              campanie sau România! Răspunsul este generat de AI Gemini.
+            </p>
+            <form
+              className="w-full flex flex-col sm:flex-row gap-4 mb-4"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setAiError("");
+                setAiResponse("");
+                setAiLoading(true);
+                try {
+                  const contextPrompt = `You are PONTA AI, the official assistant of the Victor Ponta 2025 presidential campaign website. This website is a modern, interactive campaign platform for Victor Viorel Ponta, featuring blockchain technology (PONTA Blockchain), a digital wallet, polls, and information about the candidate. You help users with questions about the campaign, blockchain, technology, and Romania. Always answer as PONTA AI, in a professional, friendly, and clear manner. Website context: presidential campaign, blockchain, digital wallet, polls, Victor Ponta, Romania, technology, innovation.`;
+                  const res = await fetch(
+                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAkjNrWeKbi2vecN7EjTKzmm5LSkmTaZBk",
+                    {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        contents: [
+                          {
+                            parts: [
+                              {
+                                text: `${contextPrompt}\nUser: ${aiInput}`,
+                              },
+                            ],
+                          },
+                        ],
+                      }),
+                    }
+                  );
+                  const data = await res.json();
+                  if (
+                    data.candidates &&
+                    data.candidates[0]?.content?.parts[0]?.text
+                  ) {
+                    setAiResponse(data.candidates[0].content.parts[0].text);
+                  } else {
+                    setAiError("Nu am putut obține un răspuns de la AI.");
+                  }
+                } catch (err) {
+                  setAiError(
+                    "Eroare la conectarea cu AI-ul. Încearcă din nou."
+                  );
+                } finally {
+                  setAiLoading(false);
+                }
+              }}
+            >
+              <input
+                type="text"
+                className="flex-1 px-4 py-3 border-2 border-[#003366] rounded-md text-lg focus:outline-none focus:border-[#c00]"
+                placeholder="Scrie întrebarea ta pentru PONTA AI..."
+                value={aiInput}
+                onChange={(e) => setAiInput(e.target.value)}
+                required
+                maxLength={200}
+                disabled={aiLoading}
+              />
+              <button
+                type="submit"
+                className="px-8 py-3 bg-[#003366] text-white rounded-md font-black shadow-lg hover:bg-[#002244] text-lg transition uppercase tracking-wider"
+                disabled={aiLoading || !aiInput.trim()}
+              >
+                {aiLoading ? "Așteaptă..." : "Trimite către PONTA AI"}
+              </button>
+            </form>
+            {aiError && (
+              <div className="text-[#c00] font-bold mb-3 bg-[#ffeeee] p-2 rounded-md w-full text-center">
+                {aiError}
+              </div>
+            )}
+            {aiResponse && (
+              <div className="w-full bg-[#f8f8f8] border-2 border-[#003366] rounded-md p-4 mt-2 text-[#003366] text-base whitespace-pre-line shadow animate-pulse-slow">
+                <b>Răspuns PONTA AI:</b>
+                <br />
+                {aiResponse}
+              </div>
+            )}
+          </section>
+
           {/* Poll Results Section */}
           <section
             id="sondaje"
@@ -840,7 +1147,7 @@ export default function Home() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                   />
                 </svg>
               </span>
@@ -856,7 +1163,7 @@ export default function Home() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                   />
                 </svg>
               </span>
@@ -973,7 +1280,7 @@ export default function Home() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
               />
             </svg>
           </a>
