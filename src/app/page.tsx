@@ -272,6 +272,18 @@ export default function Home() {
 
   return (
     <div className="main-ponta-container w-full max-w-full overflow-x-hidden">
+      {/* Intro Animation Overlay */}
+      {showIntro && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#c00] bg-opacity-90 transition-opacity duration-700 animate-fade-out pointer-events-none">
+          <div className="flex flex-col items-center">
+            <Image src="/481125071_1199302274874671_3006654431470991853_n.jpg" alt="Victor Ponta" width={120} height={120} className="rounded-full border-4 border-white mb-6 animate-bounce" />
+            <h1 className="text-3xl sm:text-5xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg text-center animate-pulse-text">Victor Viorel Ponta</h1>
+            <h2 className="text-lg sm:text-2xl font-extrabold text-[#fff200] mb-4 uppercase tracking-wider text-center animate-pulse">Campanie Prezidențială 2025</h2>
+            <div className="w-16 h-1 bg-[#fff200] rounded-full mb-4 animate-pulse"></div>
+            <span className="text-white text-lg font-bold animate-blink">ROMÂNIA PE PRIMUL LOC</span>
+          </div>
+        </div>
+      )}
       {/* Legal Banner - Required by law */}
       <div className="bg-white text-black py-3 text-center shadow-md border-b-2 border-[#c00] px-2 sm:px-4">
         <div className="font-extrabold text-lg">
@@ -318,15 +330,11 @@ export default function Home() {
               PONTA Blockchain
             </a>
             <a
-              href="#campanie"
+              href="#ponta-ai"
               className="px-8 py-4 bg-[#003366] text-white rounded-md font-black shadow-lg hover:bg-[#002244] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
             >
-              Alătură-te acum
+              AI PONTA
             </a>
-          </div>
-          <div className="mt-8 px-8 py-4 bg-[#003366] text-[#fff200] rounded-md font-black shadow-lg border-4 border-[#c00] text-lg text-center">
-            <span className="block text-white text-xl mb-1">
-            </span>
           </div>
         </div>
       </header>
@@ -1202,8 +1210,8 @@ export default function Home() {
               </div>
             )}
             {aiResponse && (
-              <div className="w-full bg-[#f4f8fb] border-2 border-[#003366] rounded-xl p-6 mt-2 text-[#003366] text-lg whitespace-pre-line shadow animate-pulse-slow font-mono">
-                <b className="text-[#c00]">Răspuns PONTA AI:</b>
+              <div className="w-full bg-[#003366] border-2 border-[#003366] rounded-xl p-6 mt-2 text-white text-lg whitespace-pre-line shadow animate-pulse-slow font-mono">
+                <b className="text-[#fff200]">Răspuns PONTA AI:</b>
                 <br />
                 {aiResponse}
               </div>
@@ -1227,7 +1235,7 @@ export default function Home() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                   />
                 </svg>
               </span>
@@ -1381,6 +1389,12 @@ export default function Home() {
       {/* Move the style block here, inside the return */}
       {/* Use a regular <style> tag for global CSS to avoid JSX/TS errors */}
       <style>{`
+        .animate-fade-out {
+          animation: fadeOutIntro 0.7s ease-in 4.3s forwards;
+        }
+        @keyframes fadeOutIntro {
+          to { opacity: 0; visibility: hidden; }
+        }
         /* Base animations */
         .animate-spin-slow {
           animation: spin 3s linear infinite;
