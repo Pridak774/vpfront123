@@ -274,7 +274,7 @@ export default function Home() {
     <div className="main-ponta-container w-full max-w-full overflow-x-hidden">
       {/* Intro Animation Overlay */}
       {showIntro && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#c00] bg-opacity-90 transition-opacity duration-700 animate-fade-out pointer-events-none">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#003366] bg-opacity-95 transition-opacity duration-700 animate-fade-out pointer-events-none">
           <div className="flex flex-col items-center">
             <Image src="/481125071_1199302274874671_3006654431470991853_n.jpg" alt="Victor Ponta" width={120} height={120} className="rounded-full border-4 border-white mb-6 animate-bounce" />
             <h1 className="text-3xl sm:text-5xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg text-center animate-pulse-text">Victor Viorel Ponta</h1>
@@ -316,22 +316,16 @@ export default function Home() {
           <h2 className="text-lg sm:text-2xl font-extrabold text-[#003366] mb-6 uppercase tracking-wider text-center">
             Candidat Independent la Președinția României
           </h2>
-          <div className="mb-4 px-4 sm:px-6 py-2 sm:py-3 bg-[#fff200] text-[#18181b] rounded-md font-black shadow-lg border-4 border-[#c00] text-base sm:text-xl text-center transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
-            POZIȚIA 6 PE BULETINUL DE VOT
-          </div>
-          <p className="text-lg sm:text-3xl font-extrabold text-[#003366] bg-[#fff200] px-4 sm:px-8 py-2 sm:py-3 rounded-md shadow-lg mb-6 uppercase tracking-wider border-4 border-[#c00] transform hover:scale-105 transition-transform duration-300 text-center">
-            ROMÂNIA PE PRIMUL LOC
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 w-full max-w-xs sm:max-w-none">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 w-full max-w-xs sm:max-w-md mx-auto">
             <a
               href="#token"
-              className="px-8 py-4 bg-[#c00] text-white rounded-md font-black shadow-lg hover:bg-[#a00] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
+              className="w-full sm:w-1/2 px-8 py-4 bg-[#c00] text-white rounded-md font-black shadow-lg hover:bg-[#a00] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
             >
-              PONTA Blockchain
+              PONTA BLOCKCHAIN
             </a>
             <a
               href="#ponta-ai"
-              className="px-8 py-4 bg-[#003366] text-white rounded-md font-black shadow-lg hover:bg-[#002244] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
+              className="w-full sm:w-1/2 px-8 py-4 bg-[#003366] text-white rounded-md font-black shadow-lg hover:bg-[#002244] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
             >
               AI PONTA
             </a>
@@ -785,7 +779,7 @@ export default function Home() {
             </div>
 
             {/* Lista adrese blockchain MUTATĂ ÎN ACEASTĂ SECȚIUNE */}
-            <section className="mb-8 bg-yellow-50 rounded shadow p-4 border-2 border-[#c00]">
+            <section className="mb-8 bg-blue-50 rounded shadow p-4 border-2 border-[#c00]">
               <h3 className="text-xl font-bold text-[#c00] mb-2">
                 Adrese Blockchain Utilizatori
               </h3>
@@ -827,7 +821,7 @@ export default function Home() {
                 portofelul fiecărui utilizator.
               </div>
             </section>
-            <div className="mb-4 px-6 py-3 bg-yellow-200 text-[#c00] rounded-md font-bold shadow border-2 border-[#c00] text-center">
+            <div className="mb-4 px-6 py-3 bg-blue-100 text-[#c00] rounded-md font-bold shadow border-2 border-[#c00] text-center">
               <span>
                 PONTA Blockchain Sistemul este infrastructura digitală publică
                 și distribuită pentru gestionarea monedei <b>PONTA Token</b>.
