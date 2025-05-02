@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-const BACKEND_URL = "http://localhost:4000";
+const BACKEND_URL = "https://vpback.onrender.com";
 
 // Add Poll type for poll state
 interface Poll {
@@ -97,7 +97,7 @@ export default function Home() {
 
   // Mining
   const handleMine = async () => {
-    const miner = walletInfo?.address || username;
+    const miner = walletInfo?.address ?? username;
     if (!miner) return;
     const res = await fetch(`${BACKEND_URL}/mine`, {
       method: "POST",
@@ -992,7 +992,8 @@ export default function Home() {
         </footer>
       </div>
       {/* Move the style block here, inside the return */}
-      <style jsx global>{`
+      {/* Use a regular <style> tag for global CSS to avoid JSX/TS errors */}
+      <style>{`
         /* Base animations */
         .animate-spin-slow {
           animation: spin 3s linear infinite;
