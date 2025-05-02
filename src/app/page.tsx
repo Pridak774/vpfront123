@@ -88,16 +88,25 @@ export default function Home() {
     if (!loginKey.trim()) {
       setLoginError("Introdu cheia privată pentru acces la portofel.");
       return;
+    }
+
+    const res = await fetch(`${BACKEND_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ privateKey: loginKey }),
+    });
+
     const data = await res.json();
     if (data.success) {
       setWalletInfo({ address: data.publicKey, privateKey: loginKey });
-      // Set username based on address (if exists in users list)
       const foundUser = users.find((u) => u.address === data.publicKey);
       setUsername(foundUser ? foundUser.username : data.publicKey);
       setRegistered(true);
       fetchBalance(data.publicKey);
+      setLoginError("");
+      setTxMessage("Autentificare reușită!");
     } else {
-      setLoginError("Cheie privată invalidă sau portofel inexistent.");
+      setLoginError(data.message || "Cheie privată invalidă sau portofel inexistent.");
     }
   };
 
@@ -165,7 +174,6 @@ export default function Home() {
 
   // Load saved poll votes and initialize polls
   useEffect(() => {
-    // Sociopol poll data for display
     const initialPolls: Poll[] = [
       {
         id: 1,
@@ -191,11 +199,10 @@ export default function Home() {
         ],
         totalVotes: 0,
         averageRating: 0,
-        expireDate: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1 week from now
+        expireDate: Date.now() + 1000 * 60 * 60 * 24 * 7,
       },
     ];
     const savedPolls = localStorage.getItem("ponta_polls");
-    // Remove the try/catch block, just setPolls(initialPolls) if parsing fails
     if (savedPolls) {
       let parsedPolls: Poll[] | null = null;
       try {
@@ -209,7 +216,6 @@ export default function Home() {
     }
   }, []);
 
-  // Add this function inside your Home component to handle client-side only rendering
   const ClientOnly = ({ children }: { children: React.ReactNode }) => {
     const [isMounted, setIsMounted] = useState(false);
 
@@ -226,7 +232,6 @@ export default function Home() {
     return <>{children}</>;
   };
 
-  // Add countdown state and logic at the top of Home
   const [timeLeft, setTimeLeft] = useState(0);
   const [currentRound, setCurrentRound] = useState<
     "first" | "second" | "ended"
@@ -266,9 +271,9 @@ export default function Home() {
   }
 
   return (
-    <div className="main-ponta-container">
+    <div className="main-ponta-container w-full max-w-full overflow-x-hidden">
       {/* Legal Banner - Required by law */}
-      <div className="bg-white text-black py-3 text-center shadow-md border-b-2 border-[#c00]">
+      <div className="bg-white text-black py-3 text-center shadow-md border-b-2 border-[#c00] px-2 sm:px-4">
         <div className="font-extrabold text-lg">
           MATERIAL PUBLICITAR POLITIC VICTOR VIOREL PONTA Candidat independent
         </div>
@@ -281,7 +286,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <header className="flex flex-col items-center py-12 bg-white shadow-2xl border-b-[12px] border-[#c00] relative overflow-hidden">
+      <header className="flex flex-col items-center py-8 sm:py-12 bg-white shadow-2xl border-b-[8px] sm:border-b-[12px] border-[#c00] relative overflow-hidden px-2 sm:px-0">
         <div className="relative z-10 flex flex-col items-center">
           <div className="rounded-full overflow-hidden border-8 border-[#c00] w-52 h-52 mb-6 shadow-2xl transform hover:scale-105 transition-transform duration-300 bg-white">
             <Image
@@ -293,19 +298,19 @@ export default function Home() {
               priority
             />
           </div>
-          <h1 className="text-6xl font-black text-[#c00] mb-2 uppercase tracking-widest drop-shadow-lg text-center">
+          <h1 className="text-3xl sm:text-6xl font-black text-[#c00] mb-2 uppercase tracking-widest drop-shadow-lg text-center">
             Victor Viorel Ponta
           </h1>
-          <h2 className="text-2xl font-extrabold text-[#003366] mb-6 uppercase tracking-wider text-center">
+          <h2 className="text-lg sm:text-2xl font-extrabold text-[#003366] mb-6 uppercase tracking-wider text-center">
             Candidat Independent la Președinția României
           </h2>
-          <div className="mb-4 px-6 py-3 bg-[#fff200] text-[#18181b] rounded-md font-black shadow-lg border-4 border-[#c00] text-xl text-center transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+          <div className="mb-4 px-4 sm:px-6 py-2 sm:py-3 bg-[#fff200] text-[#18181b] rounded-md font-black shadow-lg border-4 border-[#c00] text-base sm:text-xl text-center transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
             POZIȚIA 6 PE BULETINUL DE VOT
           </div>
-          <p className="text-3xl font-extrabold text-[#003366] bg-[#fff200] px-8 py-3 rounded-md shadow-lg mb-6 uppercase tracking-wider border-4 border-[#c00] transform hover:scale-105 transition-transform duration-300 text-center">
+          <p className="text-lg sm:text-3xl font-extrabold text-[#003366] bg-[#fff200] px-4 sm:px-8 py-2 sm:py-3 rounded-md shadow-lg mb-6 uppercase tracking-wider border-4 border-[#c00] transform hover:scale-105 transition-transform duration-300 text-center">
             ROMÂNIA PE PRIMUL LOC
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 w-full max-w-xs sm:max-w-none">
             <a
               href="#token"
               className="px-8 py-4 bg-[#c00] text-white rounded-md font-black shadow-lg hover:bg-[#a00] text-lg transition transform hover:translate-y-[-2px] text-center uppercase tracking-wider"
@@ -321,19 +326,14 @@ export default function Home() {
           </div>
           <div className="mt-8 px-8 py-4 bg-[#003366] text-[#fff200] rounded-md font-black shadow-lg border-4 border-[#c00] text-lg text-center">
             <span className="block text-white text-xl mb-1">
-              NUMĂRĂTOAREA INVERSĂ {getRoundText(currentRound)}
-            </span>
-            <span className="text-3xl">{formatTimeLeft(timeLeft)}</span>
-            <span className="block text-white text-sm mt-2">
-              {getRoundText("first")}
             </span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="px-4 py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+      <div className="px-2 sm:px-4 py-6 sm:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 mb-10">
           {/* About Section */}
           <section
             className="bg-white text-[#18181b] rounded-md shadow-2xl p-8 border-l-8 border-[#003366] transform hover:translate-y-[-5px] transition-transform duration-300"
@@ -1243,7 +1243,7 @@ export default function Home() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                   />
                 </svg>
               </span>
