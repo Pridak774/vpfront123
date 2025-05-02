@@ -47,6 +47,13 @@ export default function Home() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState("");
 
+  // Intro animation state
+  const [showIntro, setShowIntro] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setShowIntro(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Registration handler: only send { username }
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,13 +88,6 @@ export default function Home() {
     if (!loginKey.trim()) {
       setLoginError("Introdu cheia privată pentru acces la portofel.");
       return;
-    }
-    // Derive public key from private key (call backend)
-    const res = await fetch(`${BACKEND_URL}/wallet/from-private`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ privateKey: loginKey }),
-    });
     const data = await res.json();
     if (data.success) {
       setWalletInfo({ address: data.publicKey, privateKey: loginKey });
@@ -1055,20 +1055,61 @@ export default function Home() {
                   </linearGradient>
                 </defs>
                 <circle cx="500" cy="60" r="80" fill="url(#aiGradient)" />
-                <rect x="60" y="200" width="200" height="40" rx="20" fill="#003366" />
-                <rect x="400" y="120" width="120" height="20" rx="10" fill="#c00" />
-                <rect x="200" y="40" width="80" height="20" rx="10" fill="#003366" />
+                <rect
+                  x="60"
+                  y="200"
+                  width="200"
+                  height="40"
+                  rx="20"
+                  fill="#003366"
+                />
+                <rect
+                  x="400"
+                  y="120"
+                  width="120"
+                  height="20"
+                  rx="10"
+                  fill="#c00"
+                />
+                <rect
+                  x="200"
+                  y="40"
+                  width="80"
+                  height="20"
+                  rx="10"
+                  fill="#003366"
+                />
               </svg>
             </div>
             <div className="flex items-center gap-3 mb-2">
               <span className="inline-block text-4xl">
-                <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#003366"/><path d="M24 36c6.627 0 12-5.373 12-12S30.627 12 24 12 12 17.373 12 24s5.373 12 12 12Z" fill="#fff"/><circle cx="19" cy="23" r="2" fill="#003366"/><circle cx="29" cy="23" r="2" fill="#003366"/><rect x="20" y="28" width="8" height="2" rx="1" fill="#003366"/></svg>
+                <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                  <rect width="48" height="48" rx="12" fill="#003366" />
+                  <path
+                    d="M24 36c6.627 0 12-5.373 12-12S30.627 12 24 12 12 17.373 12 24s5.373 12 12 12Z"
+                    fill="#fff"
+                  />
+                  <circle cx="19" cy="23" r="2" fill="#003366" />
+                  <circle cx="29" cy="23" r="2" fill="#003366" />
+                  <rect
+                    x="20"
+                    y="28"
+                    width="8"
+                    height="2"
+                    rx="1"
+                    fill="#003366"
+                  />
+                </svg>
               </span>
-              <h3 className="text-4xl font-black text-[#003366] tracking-tight uppercase">PONTA AI</h3>
+              <h3 className="text-4xl font-black text-[#003366] tracking-tight uppercase">
+                PONTA AI
+              </h3>
             </div>
             <div className="w-16 h-1 bg-[#c00] rounded-full mb-6"></div>
             <p className="text-[#18181b] text-lg mb-6 text-center max-w-xl">
-              <b>PONTA AI</b> este asistentul tău digital pentru blockchain, tehnologie, campanie și România. Răspunsurile sunt generate de AI Ponta, cu context profesional și actual.
+              <b>PONTA AI</b> este asistentul tău digital pentru blockchain,
+              tehnologie, campanie și România. Răspunsurile sunt generate de AI
+              Ponta, cu context profesional și actual.
             </p>
             <form
               className="w-full flex flex-col sm:flex-row gap-4 mb-4"
@@ -1098,13 +1139,18 @@ export default function Home() {
                     }
                   );
                   const data = await res.json();
-                  if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+                  if (
+                    data.candidates &&
+                    data.candidates[0]?.content?.parts[0]?.text
+                  ) {
                     setAiResponse(data.candidates[0].content.parts[0].text);
                   } else {
                     setAiError("Nu am putut obține un răspuns de la AI.");
                   }
                 } catch (err) {
-                  setAiError("Eroare la conectarea cu AI-ul. Încearcă din nou.");
+                  setAiError(
+                    "Eroare la conectarea cu AI-ul. Încearcă din nou."
+                  );
                 } finally {
                   setAiLoading(false);
                 }
@@ -1129,7 +1175,22 @@ export default function Home() {
               >
                 {aiLoading ? (
                   <span className="animate-spin-slow inline-block mr-2">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" strokeWidth="4" opacity="0.2"/><path d="M22 12a10 10 0 0 1-10 10" stroke="#fff" strokeWidth="4" strokeLinecap="round"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="#fff"
+                        strokeWidth="4"
+                        opacity="0.2"
+                      />
+                      <path
+                        d="M22 12a10 10 0 0 1-10 10"
+                        stroke="#fff"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
                 ) : null}
                 {aiLoading ? "Așteaptă..." : "TRIMITE CĂTRE PONTA AI"}
@@ -1519,3 +1580,7 @@ export default function Home() {
 
         .animate-text-glow {
           animation: textGlow 2
+      `}</style>
+    </div>
+  );
+}
