@@ -106,7 +106,9 @@ export default function Home() {
       setLoginError("");
       setTxMessage("Autentificare reușită!");
     } else {
-      setLoginError(data.message || "Cheie privată invalidă sau portofel inexistent.");
+      setLoginError(
+        data.message || "Cheie privată invalidă sau portofel inexistent."
+      );
     }
   };
 
@@ -274,13 +276,25 @@ export default function Home() {
     <div className="main-ponta-container w-full max-w-full overflow-x-hidden">
       {/* Intro Animation Overlay */}
       {showIntro && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#003366] bg-opacity-95 transition-opacity duration-700 animate-fade-out pointer-events-none">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#003366] via-[#0055a5] to-[#003366] bg-[length:200%_200%] animate-intro-gradient transition-opacity duration-700 animate-fade-out pointer-events-none">
           <div className="flex flex-col items-center">
-            <Image src="/481125071_1199302274874671_3006654431470991853_n.jpg" alt="Victor Ponta" width={120} height={120} className="rounded-full border-4 border-white mb-6 animate-bounce" />
-            <h1 className="text-3xl sm:text-5xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg text-center animate-pulse-text">Victor Viorel Ponta</h1>
-            <h2 className="text-lg sm:text-2xl font-extrabold text-[#fff200] mb-4 uppercase tracking-wider text-center animate-pulse">Campanie Prezidențială 2025</h2>
+            <Image
+              src="/481125071_1199302274874671_3006654431470991853_n.jpg"
+              alt="Victor Ponta"
+              width={120}
+              height={120}
+              className="rounded-full border-4 border-white mb-6 animate-bounce"
+            />
+            <h1 className="text-3xl sm:text-5xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg text-center animate-pulse-text">
+              Victor Viorel Ponta
+            </h1>
+            <h2 className="text-lg sm:text-2xl font-extrabold text-[#fff200] mb-4 uppercase tracking-wider text-center animate-pulse">
+              Campanie Prezidențială 2025
+            </h2>
             <div className="w-16 h-1 bg-[#fff200] rounded-full mb-4 animate-pulse"></div>
-            <span className="text-white text-lg font-bold animate-blink">ROMÂNIA PE PRIMUL LOC</span>
+            <span className="text-white text-lg font-bold animate-blink">
+              ROMÂNIA PE PRIMUL LOC
+            </span>
           </div>
         </div>
       )}
@@ -821,7 +835,7 @@ export default function Home() {
                 portofelul fiecărui utilizator.
               </div>
             </section>
-            <div className="mb-4 px-6 py-3 bg-blue-100 text-[#c00] rounded-md font-bold shadow border-2 border-[#c00] text-center">
+            <div className="mb-4 px-6 py-3 bg-white border-2 border-[#003366] text-[#003366] rounded-md font-bold shadow text-center">
               <span>
                 PONTA Blockchain Sistemul este infrastructura digitală publică
                 și distribuită pentru gestionarea monedei <b>PONTA Token</b>.
@@ -1588,6 +1602,15 @@ export default function Home() {
 
         .animate-text-glow {
           animation: textGlow 2
+        }
+        .animate-intro-gradient {
+          animation: introGradientMove 5s linear infinite;
+        }
+        @keyframes introGradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
       `}</style>
     </div>
   );
