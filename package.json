@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.5",
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "elliptic": "^6.6.1",
