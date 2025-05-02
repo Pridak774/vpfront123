@@ -883,9 +883,7 @@ export default function Home() {
                 <div className="font-bold text-[#003366] uppercase text-sm">
                   Supply:
                 </div>
-                <div className="text-[#c00] font-black text-xl">
-                  220.000.000
-                </div>
+                <div className="text-[#c00] font-black text-xl">22.000.000</div>
               </div>
             </div>
             {/* WALLET UI: registration, mining, balance, transfer */}
@@ -917,7 +915,7 @@ export default function Home() {
                       type="submit"
                       className="px-8 py-4 bg-[#003366] text-white rounded-md font-black shadow-lg hover:bg-[#002244] text-lg transition w-full uppercase tracking-wider transform hover:translate-y-[-2px]"
                     >
-                      Creează portofel și primește 1.000 PONTA Blockchain
+                      Creează portofel și primește 1.000 PONTA TOKEN
                     </button>
                   </form>
                   {/* Login with private key */}
@@ -1004,7 +1002,7 @@ export default function Home() {
                     onClick={handleMine}
                     className="px-8 py-4 bg-[#c00] text-white rounded-md font-black shadow-lg hover:bg-[#a00] text-lg transition w-full uppercase tracking-wider mb-4"
                   >
-                    Minează 400 PONTA Blockchain (o dată la 24h)
+                    Minează 400 PONTA TOKEN (o dată la 24h)
                   </button>
                   {txMessage && (
                     <div className="mt-2 text-[#003366] font-bold">
@@ -1016,7 +1014,7 @@ export default function Home() {
                     className="w-full flex flex-col gap-2 mt-4"
                   >
                     <div className="font-bold text-[#003366]">
-                      Transferă PONTA Blockchain:
+                      Transferă PONTA TOKEN:
                     </div>
                     <input
                       type="text"
@@ -1061,7 +1059,10 @@ export default function Home() {
           </section>
 
           {/* PONTA AI Section - Tech & Professional Redesign */}
-          <section className="my-12 max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl border-4 border-[#003366] p-10 flex flex-col items-center relative overflow-hidden">
+          <section
+            id="ponta-ai"
+            className="my-12 max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl border-4 border-[#003366] p-10 flex flex-col items-center relative overflow-hidden"
+          >
             <div className="absolute inset-0 pointer-events-none opacity-10 select-none">
               <svg width="100%" height="100%" viewBox="0 0 600 300">
                 <defs>
@@ -1376,7 +1377,7 @@ export default function Home() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
               />
             </svg>
           </a>
